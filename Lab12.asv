@@ -1,0 +1,14 @@
+[Y, FS]=audioread('Recording.wav');
+t = [0:length(Y)-1]/(FS*length(Y));
+
+figure; plot(t, Y, '-k');grid on;
+title('Recording.wav');
+xlabel('t, Time, ms');ylabel('Probably volts?');
+
+fqs = fftshift(fft(Y));
+f = fftaxisshift(fftaxis(t));
+
+figure;cxplot(f/FS,fqs);grid on;
+title('Pulse');
+xzoom(0, 0.4e5);
+xlabel('f, Freq, Hz');ylabel('v, Volts');
